@@ -46,36 +46,39 @@ public:
 
     bool ball_found = false;
 
-    int i, j;
+    int i,j,s,e,f; // intializing for height, width, intial, end and final coordinates of the white pixel
+
+    i=j=s=e=f=0;
 
     // TODO: Loop through each pixel in the image and check if there's a bright white one
     // Then, identify if this pixel falls in the left, mid, or right side of the image
     // Depending on the white ball position, call the drive_bot function and pass velocities to it
     // Request a stop when there's no white ball seen by the camera
-    for ( i = 0; i < img.height; i++){
 
-        for ( j = (0 + i * img.step) ; j < (img.step + i * img.step); j++){
-
-            if (img.data[j] - white_pixel ==0) {
+    //my_method: finding the average of the first and last white pixels found to find the average position of the ball
+    for(i ; i < img.height; i++) {
+        for (j=0; j < img.width; j++) {
+            if( ( img.data[3 *  (j + ( i * img.width ) ) ] == white_pixel) && ( img.data[(3 *  (j + ( i * img.width ) ) ) + 1 ] == white_pixel) && ( img.data[(3 *  (j + ( i * img.width ) ) ) + 2 ] == white_pixel)) {
                 ball_found = true;
-                break;
-            }   
+		if (s=0){
+                	s=j;
+ 		}
+                e=j;
+                f= int ((e+s)/2);
+            }
         }
-
     }
 
     if ( ball_found== true ){
 
-        if ( j < int( (j - i * img.step)/3) ){
+        if ( f <= img.width/3){
             drive_robot(0,-0.05);
         }
-
-        else if ( i > (img.step - int( (j - i * img.step)/3) ) ) {
+        else if ( f >= (2 * img.width)/3){
             drive_robot(0,0.05);
         }
-
-        else {
-            drive_robot(0.05, 0);
+        else{
+            drive_robot(0.3,0);
         }
     }
 
