@@ -60,7 +60,7 @@ public:
         for (j=0; j < img.width; j++) {
             if( ( img.data[3 *  (j + ( i * img.width ) ) ] == white_pixel) && ( img.data[(3 *  (j + ( i * img.width ) ) ) + 1 ] == white_pixel) && ( img.data[(3 *  (j + ( i * img.width ) ) ) + 2 ] == white_pixel)) {
                 ball_found = true;
-		if (s=0){
+		if (s==0){
                 	s=j;
  		}
                 e=j;
