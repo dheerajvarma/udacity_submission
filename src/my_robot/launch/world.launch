@@ -3,7 +3,10 @@
 <launch>
 
   <!-- World File -->
-  <arg name="world_file" default="$(find my_robot)/worlds/myspace01.world"/>
+  <arg name="world_file" default="$(find my_robot)/worlds/myspacefinal.world"/>
+
+  <!-- launch other relevant files -->
+  <include file="$(find my_robot)/launch/robot_description.launch" />
 
   <!-- Launch Gazebo World -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -14,18 +17,15 @@
   </include>
 
   <!-- Robot pose -->
-  <arg name="x" default="0"/>
-  <arg name="y" default="0"/>
+  <arg name="x" default="-20"/>
+  <arg name="y" default="-20"/>
   <arg name="z" default="0"/>
   <arg name="roll" default="0"/>
   <arg name="pitch" default="0"/>
   <arg name="yaw" default="0"/>
 
-  <!-- Launch other relevant files-->
-  <include file="$(find my_robot)/launch/robot_description.launch"/>
-  
-  <!-- Find my robot Description-->
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find my_robot)/urdf/my_robot.xacro'"/>
+  <!-- find my robot description -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find my_robot)/urdf/my_robot.xacro'" />
 
   <!-- Spawn My Robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
@@ -37,5 +37,3 @@
   <node name="rviz" pkg="rviz" type="rviz" respawn="false"/>
 
 </launch>
-
-
