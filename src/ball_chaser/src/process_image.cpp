@@ -72,13 +72,13 @@ public:
     if ( ball_found== true ){
 
         if ( f <= img.width/3){
-            drive_robot(0,-0.05);
-        }
-        else if ( f >= (2 * img.width)/3){
             drive_robot(0,0.05);
         }
+        else if ( f >= (2 * img.width)/3){
+            drive_robot(0,-0.05);
+        }
         else{
-            drive_robot(0.3,0);
+            drive_robot(0.6,0);
         }
     }
 
